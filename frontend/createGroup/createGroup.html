@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create group</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Add an element to display the list of users -->
+<div class="user-list">
+    <h2>Users:</h2>
+    <ul id="userList"></ul>
+</div>
+
+<div class="form">
+    
+    <label for="groupName">Group Name:</label>
+    <input type="text" id="groupName" placeholder="Group Name"><br>
+    <label>Select Members:</label>
+    <div id="userSelection">
+        <!-- Users will be displayed here -->
+    </div>
+    <button id="createGroupButton">Create Group</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="createGroup.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* Apply some basic styling to the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the container for the form */
+.form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form labels and inputs */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style the user list container */
+.user-list {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the user list header */
+.user-list h2 {
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Style the user selection container */
+#userSelection {
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 4px;
+}
+
+/* Style the checkboxes and labels for user selection */
+input[type="checkbox"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Style the "Create Group" button */
+#createGroupButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#createGroupButton:hover {
+    background-color: #0056b3;
+}
+
+/* Style the message element for displaying results or errors */
+#message {
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+}
