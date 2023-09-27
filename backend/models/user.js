@@ -44,6 +44,7 @@ Group.belongsTo(User, {
     as: 'group_members',
   });
   
+  
 
 
   Group.prototype.addUser = async function (user) {

@@ -1,6 +1,4 @@
-// Import necessary modules and models
-import { Op } from 'sequelize';
-import { sequelize } from '../db.js'; // Assuming the path to your Sequelize instance is correct
+// Assuming the path to your Sequelize instance is correct
 import User from '../models/user.js'; // Assuming the path to your User model is correct
 import Group from '../models/group.js'; // Assuming the path to your Group model is correct
 

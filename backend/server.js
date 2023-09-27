@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import userRoutes from './routes/user.js'
 import groupRoutes from './routes/group.js'
+import chatRoutes from './routes/chat.js'
 
 const app = express()
 
@@ -29,6 +30,7 @@ app.use(
 
 app.use('/user',userRoutes)
 app.use('/group',groupRoutes)
+app.use('/chat', chatRoutes)
 
 
 
