@@ -20,6 +20,8 @@ const GroupChat = sequelize.define('GroupChat', {
     filepath: {
         type: DataTypes.STRING, // Store the path to the multimedia file on your server (if applicable)
     },
+    
+    
 });
 
 // Define associations with User and Group models
