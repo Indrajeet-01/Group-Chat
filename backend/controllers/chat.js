@@ -47,50 +47,24 @@ export const createGroupChatMessage = async (req, res) => {
 
 
 
-// Controller function to retrieve existing chat messages for a specific group and its members
+// Controller function to retrieve all chat messages for a specific group
 export const retrieveMessages = async (req, res) => {
-    try {
-        const { groupId, userId } = req.query;
+  try {
+      const { groupId } = req.query;
 
-        // Check if the user is a member of the group
-        const isMember = await Group.findOne({
-            where: {
-                id: groupId, 
-            },
-            include: [
-                {
-                    model: User,
-                    as: 'group_members',
-                    where: {
-                        id: userId,
-                    },
-                },
-            ],
-        });
+      // Fetch messages for the specified group
+      const messages = await GroupChat.findAll({
+          where: {
+              group_id:groupId,
+          },
+          
+          order: [['createdAt', 'ASC']],
+      });
 
-        if (!isMember) {
-            return res.status(403).json({ error: 'User is not a member of the group' });
-        }
-
-        // Fetch messages for the specified group
-        const messages = await GroupChat.findAll({
-            where: {
-                groupId,
-            },
-            include: [
-                {
-                    model: User,
-                    as: 'sender',
-                    attributes: ['username'],
-                },
-            ],
-            order: [['createdAt', 'ASC']],
-        });
-
-        // Respond with the retrieved messages
-        res.status(200).json(messages);
-    } catch (error) {
-        console.error('Error retrieving messages:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+      // Respond with the retrieved messages
+      res.status(200).json(messages);
+  } catch (error) {
+      console.error('Error retrieving messages:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
