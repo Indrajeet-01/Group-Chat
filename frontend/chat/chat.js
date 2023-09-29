@@ -1,58 +1,85 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const chatMessages = document.getElementById('chat-messages');
-    const messageInput = document.getElementById('message-input');
-    const sendButton = document.getElementById('send-button');
+document.addEventListener("DOMContentLoaded", () => {
+    const messageInput = document.getElementById("message-input");
+    const sendButton = document.getElementById("send-button");
+    const chatMessages = document.getElementById("chat-messages");
+    const chatHeader = document.getElementById("chat-header");
 
-    // Function to add a message to the chat
-    function addMessage(messageText, isMyMessage = false) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message', isMyMessage ? 'my-message' : 'other-message');
-        messageElement.textContent = messageText;
-        chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
-    }
+    // Function to add a new message to the chat
+    const addMessageToChat = (messageText, isUser) => {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = isUser ? "user-message" : "other-message";
+        messageDiv.textContent = messageText;
+        chatMessages.appendChild(messageDiv);
+        // Scroll to the bottom of the chat
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
 
-    // Function to retrieve existing chat messages
-    async function retrieveMessages() {
-        try {
-            const response = await axios.get('/api/group-chat'); // Replace with your API endpoint
-            const messages = response.data;
+    // Function to update the chat header with the group name
+    const updateChatHeader = (groupName) => {
+        chatHeader.textContent = groupName;
+    };
 
-            messages.forEach((message) => {
-                addMessage(`${message.sender.username}: ${message.message}`);
-            });
-        } catch (error) {
-            console.error('Error retrieving messages:', error);
-        }
-    }
+    // Fetch the group name from the backend using Axios
+    axios.get("/api/getGroupName")
+        .then((response) => {
+            const groupName = response.data.groupName; // Assuming your API response has a groupName field
+            updateChatHeader(groupName);
+        })
+        .catch((error) => {
+            console.error("Error fetching group name:", error);
+        });
 
-    // Function to send a message
-    async function sendMessage() {
-        const message = messageInput.value.trim();
-        if (message !== '') {
-            addMessage(`You: ${message}`, true);
-            messageInput.value = '';
-
-            try {
-                const response = await axios.post('/api/group-chat', { message }); // Replace with your API endpoint
-                // Handle the response if needed
-            } catch (error) {
-                console.error('Error sending message:', error);
-            }
-        }
-    }
-
-    // Event listener for send button click
-    sendButton.addEventListener('click', sendMessage);
-
-    // Event listener for Enter key in the message input
-    messageInput.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            sendMessage();
+    // Event listener for sending a message
+    sendButton.addEventListener("click", () => {
+        const messageText = messageInput.value;
+        if (messageText.trim() !== "") {
+            // Send the message to the backend using Axios
+            axios.post("/api/createGroupChatMessage", {
+                groupId: 123, // Replace with the actual group ID
+                senderId: 456, // Replace with the actual sender ID
+                message: messageText,
+                filename: "", // Add filename and filepath if needed
+                filepath: "",
+            })
+                .then((response) => {
+                    const newMessage = response.data;
+                    // After successfully sending the message, add it to the chat
+                    addMessageToChat(newMessage.message, true);
+                    // Clear the input field
+                    messageInput.value = "";
+                })
+                .catch((error) => {
+                    console.error("Error sending message:", error);
+                });
         }
     });
 
-    // Load existing messages when the page loads
-    retrieveMessages();
+    // Function to retrieve and display previous chat messages
+    const retrievePreviousMessages = () => {
+        // Fetch previous messages from the backend using Axios
+        axios.get("/api/retrieveMessages?groupId=123") // Replace with the actual group ID
+            .then((response) => {
+                const messages = response.data;
+                messages.forEach((message) => {
+                    // Display each retrieved message in the chat
+                    addMessageToChat(message.message, false);
+                });
+            })
+            .catch((error) => {
+                console.error("Error retrieving messages:", error);
+            });
+    };
+
+    // Call the function to retrieve and display previous messages
+    retrievePreviousMessages();
+
+    // Simulate receiving a message (you can replace this with actual API calls)
+    const simulateIncomingMessage = (messageText) => {
+        addMessageToChat(messageText, false);
+    };
+
+    // Example: Simulate receiving a message after 2 seconds (replace with your own logic)
+    setTimeout(() => {
+        simulateIncomingMessage("Hello, how are you?");
+    }, 2000);
 });
