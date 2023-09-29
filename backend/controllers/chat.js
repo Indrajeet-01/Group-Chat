@@ -31,10 +31,10 @@ export const createGroupChatMessage = async (req, res) => {
       const newMessage = await GroupChat.create({
         
         group_id: groupId,
-        senderId,
+        user_id: senderId,
         message,
         filename,
-        filepath,
+        filepath, 
       });
   
       // Return the newly created message as a response

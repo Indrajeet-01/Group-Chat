@@ -5,10 +5,10 @@ import User from './user.js'; // Assuming the path to your User model is correct
 import Group from './group.js'; // Assuming the path to your Group model is correct
 
 const GroupChat = sequelize.define('GroupChat', {
-    id: {
+    chat_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true, 
     },
     message: {
         type: DataTypes.TEXT, // Text content of the message
@@ -21,12 +21,19 @@ const GroupChat = sequelize.define('GroupChat', {
         type: DataTypes.STRING, // Store the path to the multimedia file on your server (if applicable)
     },
     
-    
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    group_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
 });
 
 // Define associations with User and Group models
 GroupChat.belongsTo(User, {
-    foreignKey: 'id',
+    foreignKey: 'user_id',
     onDelete: 'CASCADE',
 });
 
