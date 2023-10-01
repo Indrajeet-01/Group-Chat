@@ -58,3 +58,16 @@ export const createGroupAndAddUsers = async (req, res) => {
     return res.status(500).json({ message: 'Internal server error.' });
   }
 };
+
+
+export const getAllGroups = async (req, res) => {
+  try {
+    const groups = await Group.findAll({
+      attributes: ['group_id', 'group_name','admin_id'], // Select only the relevant attributes
+    });
+    res.status(200).json(groups);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+};

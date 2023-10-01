@@ -79,3 +79,47 @@ footer {
         margin: 10px 0;
     }
 }
+
+
+/* Add this CSS to your existing style.css file or create a new one */
+
+/* Style for the list of groups */
+#groupList {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#groupList li {
+    margin: 10px 0;
+}
+
+#groupList a {
+    text-decoration: none;
+    color: #075e54;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+#groupList a:hover {
+    color: #333; /* Change color on hover */
+}
+
+/* Add some spacing and border to separate the list from the content */
+.groups {
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+/* Adjustments for small screens */
+@media (max-width: 768px) {
+    .groups {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+}

@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
     const message = document.getElementById("message");
 
+    console.log("loginForm:", loginForm);
+    console.log("message:", message);
+
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 

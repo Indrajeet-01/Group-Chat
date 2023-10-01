@@ -7,7 +7,8 @@ import Group from '../models/group.js';// Assuming the path to your User model i
 // Controller function to create a new group chat message
 export const createGroupChatMessage = async (req, res) => {
     try {
-      const { groupId, senderId, message, filename, filepath } = req.body;
+        const { groupId, senderId } = req.params; // Get groupId and senderId from URL params
+        const { message, filename, filepath } = req.body;
   
       // Check if the group exists
       const group = await Group.findByPk(groupId);

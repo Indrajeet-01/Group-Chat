@@ -19,23 +19,53 @@
         </ul>
     </nav>
     <main>
-        <section class="intro">
-            <h2>About Us</h2>
-            <p>Welcome to Group Chat, your one-stop solution for group communication.</p>
-        </section>
-        <section class="features">
-            <h2>Features</h2>
-            <ul>
-                <li>Join or create groups</li>
-                <li>Real-time group messaging</li>
-                <li>Share images and files</li>
-                <li>Personalized profiles</li>
+        <section class="groups">
+            <h2>Groups</h2>
+            <ul id="groupList">
+                <!-- Group names will be added here dynamically -->
             </ul>
         </section>
+        
     </main>
     <footer>
         <p>&copy; 2023 Group Chat App</p>
     </footer>
+    <!-- ... (your existing meta tags and CSS link) ... -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- ... (your existing title and CSS link) ... -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Get a reference to the groupList element
+    const groupList = document.getElementById("groupList");
+
+    // Make an API call to fetch all groups from the backend using Axios
+    axios.get("http://localhost:8000/group/display") // Replace with the actual API endpoint
+        .then((response) => {
+            const groups = response.data;
+
+            // Loop through the groups and create list items with clickable links
+            groups.forEach((group) => {
+                const listItem = document.createElement("li");
+                const link = document.createElement("a");
+                link.textContent = group.group_name;
+                link.href = `../chat/chat.html`; // Replace with the actual chat link
+                listItem.appendChild(link);
+                groupList.appendChild(listItem);
+
+                link.addEventListener("click", () => {
+                    localStorage.setItem("groupId", group.group_id);
+                    localStorage.setItem("groupName", group.group_name)
+                });
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    });
+
+
+    </script>
 </body>
 </html>
 
