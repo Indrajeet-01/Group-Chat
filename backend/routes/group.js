@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/',createGroupAndAddUsers )
 router.get('/users',getAllUsers)
-router.get('/display',getAllGroups)
+router.get('/display/:id',getAllGroups)
 
 
 

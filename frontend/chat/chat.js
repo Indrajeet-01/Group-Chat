@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const messageInput = document.getElementById("message-input");
+    const fileInput = document.getElementById("file-input");
     const sendButton = document.getElementById("send-button");
     const chatMessages = document.getElementById("chat-messages");
     const chatHeader = document.getElementById("chat-header");
@@ -27,7 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event listener for sending a message
     sendButton.addEventListener("click", () => {
         const messageText = messageInput.value;
-        if (messageText.trim() !== "") {
+        const file = fileInput.files[0];
+        if (messageText.trim() !== "" || file) {
+            const formData = new FormData();
+            // Append message to the form data
+            formData.append("message", messageText);
+
+            // Append file to the form data if it exists
+            if (file) {
+                formData.append("file", file);
+            }
+
             // Send the message to the backend using Axios
             axios.post(`http://localhost:8000/chat/${groupId}/${senderId}`, {
                 
@@ -41,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     addMessageToChat(newMessage.message, true);
                     // Clear the input field
                     messageInput.value = "";
+                    fileInput.value = "";
                 })
                 .catch((error) => {
                     console.error("Error sending message:", error);
@@ -69,13 +81,5 @@ document.addEventListener("DOMContentLoaded", () => {
     // Call the function to retrieve and display previous messages
     retrievePreviousMessages();
 
-    // Simulate receiving a message (you can replace this with actual API calls)
-    const simulateIncomingMessage = (messageText) => {
-        addMessageToChat(messageText, false);
-    };
-
-    // Example: Simulate receiving a message after 2 seconds (replace with your own logic)
-    setTimeout(() => {
-        simulateIncomingMessage("Hello, how are you?");
-    }, 2000);
+    
 });

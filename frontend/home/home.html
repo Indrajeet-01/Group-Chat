@@ -13,9 +13,8 @@
     <nav>
         <ul>
             <li><a href="../createGroup/createGroup.html">CreateYourOwnGroup</a></li>
-            <li><a href="#">Groups</a></li>
-            <li><a href="../chat/chat.html">Chat</a></li>
-            <li><a href="#">Logout</a></li>
+            
+            <li><button id="logout-button">Logout</button></li>
         </ul>
     </nav>
     <main>
@@ -38,9 +37,11 @@
         document.addEventListener("DOMContentLoaded", function () {
     // Get a reference to the groupList element
     const groupList = document.getElementById("groupList");
+    const userId = localStorage.getItem("id")
+    const logoutButton = document.getElementById('logout-button');
 
     // Make an API call to fetch all groups from the backend using Axios
-    axios.get("http://localhost:8000/group/display") // Replace with the actual API endpoint
+    axios.get(`http://localhost:8000/group/display/${userId}`) // Replace with the actual API endpoint
         .then((response) => {
             const groups = response.data;
 
@@ -62,9 +63,25 @@
         .catch((error) => {
             console.error(error);
         });
+
+        logoutButton.addEventListener('click', () => {
+               // Send a logout request to the server
+                axios.post('http://localhost:8000/user/logout')
+                .then(response => {
+                
+                    if (response.status === 200) {
+                        alert('User has been logged out.');
+                        window.location.href = '../logIn/login.html';
+                    }
+                })
+                .catch(error => console.error('Error logging out:', error));
+            });
+
+
     });
 
 
+    
     </script>
 </body>
 </html>
