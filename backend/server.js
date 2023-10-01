@@ -8,6 +8,8 @@ import userRoutes from './routes/user.js'
 import groupRoutes from './routes/group.js'
 import chatRoutes from './routes/chat.js'
 
+import multer from 'multer'
+
 const app = express()
 
 app.use(cors())
@@ -26,6 +28,22 @@ app.use(
     
     })
 );
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '../frontend/files')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now()+file.originalname)
+    }
+})
+
+const upload = multer({storage})
+
+app.post('/mediaChat',upload.single('file'),function (req,res){
+    const file = req.file
+res.status(200).json(file.filename)
+})
 
 
 app.use('/user',userRoutes)

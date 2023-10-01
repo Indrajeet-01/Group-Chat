@@ -26,18 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     // Event listener for sending a message
-    sendButton.addEventListener("click", () => {
+    sendButton.addEventListener("click", async () => {
         const messageText = messageInput.value;
         const file = fileInput.files[0];
         if (messageText.trim() !== "" || file) {
-            const formData = new FormData();
-            // Append message to the form data
-            formData.append("message", messageText);
-
-            // Append file to the form data if it exists
-            if (file) {
-                formData.append("file", file);
-            }
+            
 
             // Send the message to the backend using Axios
             axios.post(`http://localhost:8000/chat/${groupId}/${senderId}`, {
@@ -51,13 +44,32 @@ document.addEventListener("DOMContentLoaded", () => {
                     // After successfully sending the message, add it to the chat
                     addMessageToChat(newMessage.message, true);
                     // Clear the input field
-                    messageInput.value = "";
-                    fileInput.value = "";
+                    
                 })
                 .catch((error) => {
                     console.error("Error sending message:", error);
                 });
         }
+        if (file) {
+            // Send the file to the mediaChat endpoint
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const mediaResponse = await axios.post("http://localhost:8000/mediaChat", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data", // Set the content type for file upload
+                },
+            });
+
+            if (mediaResponse.status === 200) {
+                const data = mediaResponse.data;
+                console.log("File uploaded successfully. Server response:", data);
+            } else {
+                console.error("Error uploading file:", mediaResponse.statusText);
+            }
+        }
+        messageInput.value = "";
+        fileInput.value = "";
     });
 
     // Function to retrieve and display previous chat messages
