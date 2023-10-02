@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Group Management</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Group Management</h1>
+        
+        
+        
+        <!-- Display group members -->
+        <div class="group-members">
+            <h2>Group Members</h2>
+            <ul id="memberList">
+                <!-- Members will be dynamically added here -->
+            </ul>
+        </div>
+        
+        <!-- Form to remove users -->
+        <div class="remove-users">
+            <h2>Remove Users</h2>
+            <form id="removeUsersForm">
+                <label for="userToRemove">Select users to remove:</label>
+                <!-- Place the user selection container here -->
+                <div id="userToRemoveSelect"></div>
+        
+                <!-- Display error messages here -->
+                <div id="errorMessage" class="error-message"></div>
+        
+                <!-- Button to remove users -->
+                <button type="submit">Remove Selected Users</button>
+            </form>
+        </div>
+        
+        <!-- Display messages -->
+        <div class="messages">
+            <p id="errorMessage" class="error"></p>
+            <p id="successMessage" class="success"></p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="removeMember.js"></script>
+</body>
+</html>
