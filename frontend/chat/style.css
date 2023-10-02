@@ -87,3 +87,24 @@ body {
     background-color: #0056b3; /* New background color on hover */
   }
   
+
+ 
+
+.group-management-link {
+    background-color: #3498db; /* Set the background color */
+    color: #fff; /* Set the text color */
+    padding: 5px; /* Add padding for spacing */
+    margin: 30px;
+    text-align: center; /* Center the text */
+  }
+  
+  .group-management-link a {
+    text-decoration: none; /* Remove underlines from the link */
+    color: #fff; /* Set the link text color */
+    font-weight: bold; /* Make the link text bold */
+  }
+  
+  .group-management-link a:hover {
+    text-decoration: underline; /* Add underlines on hover */
+  }
+  
