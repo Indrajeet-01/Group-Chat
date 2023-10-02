@@ -1,7 +1,6 @@
-import GroupChat from '../models/chat.js';// Assuming the path to your GroupChat model is correct
-import User from '../models/user.js'; // Assuming the path to your User model is correct
-import Group from '../models/group.js';// Assuming the path to your User model is correct
-// Assuming the path to your userGroup model is correct
+import GroupChat from '../models/chat.js';
+import User from '../models/user.js';
+import Group from '../models/group.js';
 
 
 // Controller function to create a new group chat message
@@ -38,7 +37,6 @@ export const createGroupChatMessage = async (req, res) => {
         filepath, 
       });
   
-      // Return the newly created message as a response
       res.status(201).json(newMessage);
     } catch (error) {
       console.error('Error creating group chat message:', error);
@@ -62,7 +60,6 @@ export const retrieveMessages = async (req, res) => {
           order: [['createdAt', 'ASC']],
       });
 
-      // Respond with the retrieved messages
       res.status(200).json(messages);
   } catch (error) {
       console.error('Error retrieving messages:', error);

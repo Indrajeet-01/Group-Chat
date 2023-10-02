@@ -41,7 +41,7 @@
     const logoutButton = document.getElementById('logout-button');
 
     // Make an API call to fetch all groups from the backend using Axios
-    axios.get(`http://localhost:8000/group/display/${userId}`) // Replace with the actual API endpoint
+    axios.get(`http://localhost:8000/group/display/${userId}`) 
         .then((response) => {
             const groups = response.data;
 
@@ -50,7 +50,7 @@
                 const listItem = document.createElement("li");
                 const link = document.createElement("a");
                 link.textContent = group.group_name;
-                link.href = `../chat/chat.html`; // Replace with the actual chat link
+                link.href = `../chat/chat.html`; 
                 listItem.appendChild(link);
                 groupList.appendChild(listItem);
 

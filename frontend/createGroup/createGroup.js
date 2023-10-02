@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 messageElement.textContent = 'Group created successfully: ' + data.message;
 
                 // Clear the form fields
-                adminIdInput.value = ''; // You may set the adminIdInput value to the admin's ID again if needed
+                adminIdInput.value = ''; 
                 groupNameInput.value = '';
                 userSelectionElement.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = false;

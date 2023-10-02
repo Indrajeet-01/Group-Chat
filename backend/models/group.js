@@ -1,4 +1,4 @@
-// group.js
+
 
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db.js';
@@ -20,7 +20,7 @@ const Group = sequelize.define('Group', {
         allowNull: false,
     },
 }, {
-    tableName: 'groups', // Specify the correct lowercase table name
+    tableName: 'groups', 
 });
 
   

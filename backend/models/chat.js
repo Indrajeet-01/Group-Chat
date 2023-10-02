@@ -1,8 +1,8 @@
-// Import necessary modules and Sequelize
+
 import { DataTypes } from 'sequelize';
-import { sequelize } from '../db.js'; // Assuming the path to your Sequelize instance is correct
-import User from './user.js'; // Assuming the path to your User model is correct
-import Group from './group.js'; // Assuming the path to your Group model is correct
+import { sequelize } from '../db.js'; 
+import User from './user.js'; 
+import Group from './group.js'; 
 
 const GroupChat = sequelize.define('GroupChat', {
     chat_id: {
@@ -11,14 +11,14 @@ const GroupChat = sequelize.define('GroupChat', {
         autoIncrement: true, 
     },
     message: {
-        type: DataTypes.TEXT, // Text content of the message
+        type: DataTypes.TEXT, 
         allowNull: false,
     },
     filename: {
-        type: DataTypes.STRING, // Store the filename of the multimedia file (if applicable)
+        type: DataTypes.STRING, 
     },
     filepath: {
-        type: DataTypes.STRING, // Store the path to the multimedia file on your server (if applicable)
+        type: DataTypes.STRING, 
     },
     
     user_id: {
@@ -42,5 +42,5 @@ GroupChat.belongsTo(Group, {
     onDelete: 'CASCADE',
 });
 
-// Export the GroupChat model
+
 export default GroupChat;

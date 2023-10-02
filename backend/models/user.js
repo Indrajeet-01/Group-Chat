@@ -27,9 +27,9 @@ const User = sequelize.define('User', {
         allowNull: false,
     },
 }, {
-  tableName: 'users', // Specify the correct lowercase table name
+  tableName: 'users', 
 });
-// Assuming this code is added to your Sequelize models
+
 
 // Define associations
 Group.belongsTo(User, {
@@ -39,7 +39,7 @@ Group.belongsTo(User, {
   });
 
   Group.belongsToMany(User, {
-    through: 'user_group', // Use your actual join table name
+    through: 'user_group', 
     foreignKey: 'group_id',
     as: 'group_members',
   });

@@ -1,13 +1,13 @@
-// Assuming the path to your Sequelize instance is correct
-import User from '../models/user.js'; // Assuming the path to your User model is correct
-import Group from '../models/group.js'; // Assuming the path to your Group model is correct
+
+import User from '../models/user.js'; 
+import Group from '../models/group.js'; 
 import { sequelize } from '../db.js';
 
 
 export const getAllUsers = async (req, res) => {
   try {
       const users = await User.findAll({
-          attributes: ['id', 'name'], // Select only the relevant attributes
+          attributes: ['id', 'name'], 
       });
       res.status(200).json(users);
   } catch (error) {
@@ -17,7 +17,7 @@ export const getAllUsers = async (req, res) => {
 };
 
 
-// Define the controller function for creating a group and adding users
+//  controller function for creating a group and adding users
 export const createGroupAndAddUsers = async (req, res) => {
   const { adminId, groupName, usersToAdd } = req.body;
 
@@ -61,8 +61,8 @@ export const createGroupAndAddUsers = async (req, res) => {
 
 export const getAllGroups = async (req, res) => {
   try {
-    // Get the user ID from local storage or your authentication mechanism
-    const loggedInUserId = req.params.id // Parse the userId as an integer
+    
+    const loggedInUserId = req.params.id 
 
     const userGroupIds = await sequelize.query(`
       SELECT group_id FROM user_group WHERE UserId = :UserId
@@ -71,8 +71,6 @@ export const getAllGroups = async (req, res) => {
       type: sequelize.QueryTypes.SELECT,
     });
 
-
-    // Extract the group IDs from the userGroups result
     const groupIds = userGroupIds.map((userGroup) => userGroup.group_id);
 
     // Retrieve the groups based on the extracted group IDs

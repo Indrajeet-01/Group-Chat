@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.className = isUser ? "user-message" : "other-message";
         messageDiv.textContent = messageText;
         chatMessages.appendChild(messageDiv);
-        // Scroll to the bottom of the chat
+        
         chatMessages.scrollTop = chatMessages.scrollHeight;
     };
 
@@ -41,10 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
             })
                 .then((response) => {
                     const newMessage = response.data;
-                    // After successfully sending the message, add it to the chat
-                    addMessageToChat(newMessage.message, true);
-                    // Clear the input field
                     
+                    addMessageToChat(newMessage.message, true);
                 })
                 .catch((error) => {
                     console.error("Error sending message:", error);
@@ -57,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const mediaResponse = await axios.post("http://localhost:8000/mediaChat", formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data", // Set the content type for file upload
+                    "Content-Type": "multipart/form-data", 
                 },
             });
 
@@ -74,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to retrieve and display previous chat messages
     const retrievePreviousMessages = () => {
-        // Fetch previous messages from the backend using Axios
-        axios.get(`http://localhost:8000/chat/display?groupId=${groupId}`) // Replace with the actual group ID
+        
+        axios.get(`http://localhost:8000/chat/display?groupId=${groupId}`) 
             .then((response) => {
                 const messages = response.data;
                 messages.forEach((message) => {
