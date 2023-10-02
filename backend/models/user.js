@@ -50,6 +50,8 @@ Group.belongsTo(User, {
   Group.prototype.addUser = async function (user) {
     await this.addGroup_members(user);
   };
-  
+  Group.prototype.removeUser = async function (user) {
+    await this.removeGroup_members(user);
+  };
 
 export default User; 

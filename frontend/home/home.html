@@ -56,7 +56,8 @@
 
                 link.addEventListener("click", () => {
                     localStorage.setItem("groupId", group.group_id);
-                    localStorage.setItem("groupName", group.group_name)
+                    localStorage.setItem("groupName", group.group_name);
+                    localStorage.setItem('adminId', group.admin_id)
                 });
             });
         })
